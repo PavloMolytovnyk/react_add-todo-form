@@ -1,11 +1,5 @@
+import { Todo } from '../../App';
 import { TodoInfo } from '../TodoInfo';
-
-export interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-  userId: number;
-}
 
 interface TodoProps {
   todos: Todo[];

@@ -1,7 +1,5 @@
 import classNames from 'classnames';
-
-import { Todo } from '../TodoList';
-import { getUserById } from '../../App';
+import { Todo } from '../../App';
 import { UserInfo } from '../UserInfo';
 
 interface TodoInfoProps {
@@ -9,8 +7,7 @@ interface TodoInfoProps {
 }
 
 export const TodoInfo = ({ todo }: TodoInfoProps) => {
-  const { id, completed, title, userId } = todo;
-  const user = getUserById(userId);
+  const { id, completed, title, user } = todo;
 
   return (
     <article

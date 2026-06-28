@@ -1,13 +1,28 @@
 import './App.scss';
-import { Todo, TodoList } from './components/TodoList';
+import { TodoList } from './components/TodoList';
 
 import usersFromServer from './api/users';
 import todosFromServer from './api/todos';
 
 import React, { useState } from 'react';
 
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
+
+export interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+  userId: number;
+  user: User;
+}
+
 function getNewId(newTodo: Todo[]) {
-  const maxId = Math.max(0, ...newTodo.map(mass => mass.id));
+  const maxId = Math.max(0, ...newTodo.map(currentTodo => currentTodo.id));
 
   return maxId + 1;
 }
@@ -91,8 +106,8 @@ export const App = () => {
           <select
             id="user-input"
             data-cy="userSelect"
-            onChange={e => {
-              setUserValue(+e.target.value);
+            onChange={changeEvent => {
+              setUserValue(+changeEvent.target.value);
               setHasUserValueInput(false);
             }}
             value={userValue}
