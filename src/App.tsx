@@ -1,25 +1,9 @@
 import './App.scss';
+import React, { useState } from 'react';
 import { TodoList } from './components/TodoList';
-
 import usersFromServer from './api/users';
 import todosFromServer from './api/todos';
-
-import React, { useState } from 'react';
-
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-}
-
-export interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-  userId: number;
-  user: User;
-}
+import { Todo, User } from './types';
 
 function getNewId(newTodo: Todo[]) {
   const maxId = Math.max(0, ...newTodo.map(currentTodo => currentTodo.id));
@@ -38,7 +22,12 @@ export const App = () => {
   const [hasUserValueInput, setHasUserValueInput] = useState(false);
   const [hasUserTitleInput, setHasUserTitleInput] = useState(false);
 
-  const [todosFrom, setTodosFrom] = useState(todosFromServer);
+  const [todosFrom, setTodosFrom] = useState<Todo[]>(() => {
+    return todosFromServer.map(todo => ({
+      ...todo,
+      user: getUserById(todo.userId) as User,
+    }));
+  });
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();

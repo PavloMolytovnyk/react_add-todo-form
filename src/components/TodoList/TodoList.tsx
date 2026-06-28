@@ -1,4 +1,4 @@
-import { Todo } from '../../App';
+import { Todo } from '../../types';
 import { TodoInfo } from '../TodoInfo';
 
 interface TodoProps {

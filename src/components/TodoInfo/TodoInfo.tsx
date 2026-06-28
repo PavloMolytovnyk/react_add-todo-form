@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { Todo } from '../../App';
 import { UserInfo } from '../UserInfo';
+import { Todo } from '../../types';
 
 interface TodoInfoProps {
   todo: Todo;
